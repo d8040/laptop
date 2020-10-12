@@ -8,21 +8,20 @@ public class Main {
 		Scanner scanner = new Scanner(System.in);
 
 		while (true) {
-			System.out.printf("명령어) ");
+			System.out.println("명령어) ");
 			String command = scanner.nextLine();
-			if (command.equals("article add")) {
+			if (command.equals("Article add")) {
 				System.out.println("게시물 추가");
-			} else if (command.equals("article list")) {
+			} else if (command.equals("Article list")) {
 				System.out.println("게시물 목록");
-			} else if (command.equals("exit")) {
+			} 
+			else if (command.equals("exit")) {
 				System.out.println("프로그램 종료");
-				break;
-			} else {
-				System.out.println("잘못된 명령어");
+			break;
 			}
-
+			else {
+				System.out.println("명령어 오류");
+			}
 		}
-		scanner.close();
 	}
-
 }
