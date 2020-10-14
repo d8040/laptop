@@ -1,80 +1,96 @@
 package com.sbs.example.laptopexam;
 
-import java.util.Scanner; //scanner java 실행
+import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in); // 키보드 입력설정
-		
-		//1번 저장소 넘버링
-		String sub2 = "";
-		String co2 = "";
-		int no2 = 0;
-		
-		//2번 저장소 넘버링
-		String sub1 = "";
-		String co1 = "";
-		int no1 = 0;
-		
-		int no = 0; //게시물 번호 초기설정
 
-		while (true) { //범위안에서 반복 실행
+		Scanner scanner = new Scanner(System.in);
+		
+		Article article1 = new Article();
+		
+		Article article2 = new Article();
+		
+		int no = 0;
+		String sub = "";
+		String con = "";
+
+
+		while (true) {
 			System.out.printf("명령어) ");
 			String command = scanner.nextLine();
-			if (command.equals("add")) {
+			if (command.startsWith("detail")) {
+				int inputedId = Integer.parseInt(command.split("l")[1]);
+				// else if (command.equals("detail1")) {
 				
-				int id = 1 + no; // 등록 시 게시물 번호 증가 설정
-				String sub;
-				String co;
-				
+				if (inputedId == 1) {
+					System.out.println("==게시물 상세==");
+					if (article1.no == 0) {
+						System.out.println(inputedId + "번 게시물은 존재 하지 않습니다.");
+						continue;
+					}
+					System.out.println("번호: " + article1.no);
+					System.out.println("제목: " + article1.sub);
+					System.out.println("내용: " + article1.con);
+				}
+				// else if (command.equals("detail2")) {
+				else if (inputedId == 2) {
+					System.out.println("==게시물 상세==");
+					if (article2.no == 0) {
+						System.out.println(inputedId + "번 게시물은 존재 하지 않습니다.");
+						continue;
+					}
+					System.out.println("번호: " + article2.no);
+					System.out.println("제목: " + article2.sub);
+					System.out.println("내용: " + article2.con);
+				}
+			}
+			else if (command.equals("add")) {
 				System.out.println("==게시물 등록==");
+
+				int id = no + 1;
+
 				System.out.printf("제목: ");
 				sub = scanner.nextLine();
 				System.out.printf("내용: ");
-				co = scanner.nextLine();
-				
-				no = id;
-				
-				if (id == 1) { //1번 게시물 작성시 내용, 제목, 번호 저장 설정
-					no1= id;
-					sub1 = sub;
-					co1 = co;
-				}
-				if (id == 2) { //2번 게시물 작성시 내용, 제목, 번호 저장 설정
-					no2= id;
-					sub2 = sub;
-					co2 = co;
-				}
-				System.out.println(id+"번 게시물이 등록되었습니다."); //또는 System.out.println("%d번 게시물이 생성되었습니다.\n", id);
-				
-			}
+				con = scanner.nextLine();
+				System.out.println(id + "번째 게시물이 등록 되었습니다."); // System.out.printf("%s번째 게시물이 등록 되었습니다.\n", id);로 대체 가능
 
-			else if (command.equals("list")) {
-				System.out.println("==게시물 목록==");
-				if (no == 0) {
-					System.out.println("게시물이 없습니다.");
-					continue;					
+				no = id;
+
+				if (no == 1) {
+					article1.sub = sub;
+					article1.con = con;
+					article1.no = no;
 				}
-				System.out.println("번호 / 제목");
+				if (no == 2) {
+					article2.sub = sub;
+					article2.con = con;
+					article2.no = no;
+				}
+
+			} else if (command.equals("list")) {
+				System.out.println("==게시물 목록==");
+
+				if (no == 0) {
+					System.out.println("저장된 게시물이 없습니다.");
+				}
 				if (no >= 1) {
-					System.out.println(no1+" / "+sub1);
+					System.out.println("번호 / 제목");
+					System.out.println(article1.no + " / " + article1.sub);
 				}
 				if (no >= 2) {
-					System.out.println(no2+" / "+sub2);
+					System.out.println("번호 / 제목");
+					System.out.println(article2.no + " / " + article2.sub);
 				}
-				
-				
 			}
 
-			else if (command.equals("exit")) { 
+			 else if (command.equals("exit")) {
 				System.out.println("==프로그램 종료==");
-				break; // while문 종료
+				break;
+			} else {
+				System.out.println("**명령어 오류");
 			}
-
-			else { // 모든 값이 참이 아닐 경우
-				System.out.println("==명령문 에러==");
-			}
-
 		}
 		scanner.close();
 	}
