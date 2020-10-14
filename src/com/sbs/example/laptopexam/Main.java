@@ -12,8 +12,7 @@ public class Main {
 		Article article2 = new Article();
 		
 		int no = 0;
-		String sub = "";
-		String con = "";
+		
 
 
 		while (true) {
@@ -49,7 +48,8 @@ public class Main {
 				System.out.println("==게시물 등록==");
 
 				int id = no + 1;
-
+				String sub;
+				String con;
 				System.out.printf("제목: ");
 				sub = scanner.nextLine();
 				System.out.printf("내용: ");
